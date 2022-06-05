@@ -15,8 +15,9 @@ export const links: LinksFunction = () => {
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "Movies",
   viewport: "width=device-width,initial-scale=1",
+  description: "Show popular movies using the tmdb.org API.",
 });
 
 export default function App() {
@@ -26,12 +27,22 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
-        <Outlet />
+      <body className="bg-zinc-900 antialiased">
+        <Layout>
+          <Outlet />
+        </Layout>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>
     </html>
+  );
+}
+
+function Layout({ children }: React.PropsWithChildren<{}>) {
+  return (
+    <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+      {children}
+    </div>
   );
 }
