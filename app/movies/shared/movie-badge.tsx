@@ -18,7 +18,7 @@ function MovieBadge({ movie }: MovieBadgeProps): JSX.Element {
           alt="movie poster"
         />
       </div>
-      <h3 className="mt-4 text-sm text-zinc-500">{movie.release_date}</h3>
+      <h3 className="mt-4 text-sm text-zinc-400">{movie.release_date}</h3>
       <p className="mt-1 text-base font-medium text-zinc-200">{movie.title}</p>
     </div>
   );
