@@ -1,19 +1,16 @@
-import type { LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import type { MovieItem } from "~/backend/types";
+import type { DataFunctionArgs } from "@remix-run/node";
+import TmdbApi from "~/backend/tmdb-api";
 import MovieList from "~/movies/movie-list/movie-list";
 import Movies from "~/movies/movies";
-import TmdbApi from "~/backend/tmdb-api";
+import { jsonTyped, useLoaderDataTyped } from "~/remix-typed";
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = async ({ request }: DataFunctionArgs) => {
   const popularMovies = await TmdbApi.movies.getPopular();
-
-  return json(popularMovies);
+  return jsonTyped(popularMovies);
 };
 
 export default function Index() {
-  const moviesData = useLoaderData<MovieItem[]>();
+  const moviesData = useLoaderDataTyped<typeof loader>();
   return (
     <Movies>
       <MovieList movies={moviesData} />
