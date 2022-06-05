@@ -2,9 +2,22 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "build": "remix build",
-    "dev": "remix dev"
+    "build": "run-s build:*",
+    "build:css": "npm run generate:css -- --minify",
+    "build:remix": "remix build",
+    "dev": "run-p dev:*",
+    "dev:css": "npm run generate:css -- --watch",
+    "dev:remix": "cross-env NODE_ENV=development binode -- @remix-run/dev:remix dev",
+    "format": "prettier --write .",
+    "generate:css": "tailwindcss -o ./app/styles/tailwind.css",
+    "typecheck": "tsc -b"
   },
+  "prettier": {},
+  "eslintIgnore": [
+    "/node_modules",
+    "/build",
+    "/public/build"
+  ],
   "dependencies": {
     "@remix-run/node": "^1.5.1",
     "@remix-run/react": "^1.5.1",
@@ -19,7 +32,15 @@
     "@remix-run/serve": "^1.5.1",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
+    "autoprefixer": "^10.4.7",
+    "binode": "^1.0.5",
+    "cross-env": "^7.0.3",
     "eslint": "^8.15.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.14",
+    "prettier": "^2.6.2",
+    "prettier-plugin-tailwindcss": "^0.1.11",
+    "tailwindcss": "^3.0.24",
     "typescript": "^4.6.4"
   },
   "engines": {
